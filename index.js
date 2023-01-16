@@ -10,7 +10,9 @@ app.post('/down', (req, res) => {
   res.sendStatus(200)
 
   console.log(req.body)
-  client.say(config.channel, `${req.body.name} (${req.body.domain}:${req.body.port}) has been down for: ${req.body.downtime}. Failures during the last 24 hours: ${req.body.failures}.`)
+  if(!req.body.online) {
+    client.say(config.channel, `${req.body.name} (${req.body.domain}:${req.body.port}) has been down for: ${req.body.downtime}. Failures during the last 24 hours: ${req.body.failures}.`)
+  }
 })
 
 app.listen(3000, () => {
